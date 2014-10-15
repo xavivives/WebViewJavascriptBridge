@@ -8,30 +8,9 @@
 
 #import "WebViewJavascriptBridge.h"
 
-#if __has_feature(objc_arc_weak)
-    #define WVJB_WEAK __weak
-#else
-    #define WVJB_WEAK __unsafe_unretained
-#endif
-
 typedef NSDictionary WVJBMessage;
 
-@implementation WebViewJavascriptBridge {
-    WVJB_WEAK WVJB_WEBVIEW_TYPE* _webView;
-    WVJB_WEAK id _webViewDelegate;
-    NSMutableArray* _startupMessageQueue;
-    NSMutableDictionary* _responseCallbacks;
-    NSMutableDictionary* _messageHandlers;
-    long _uniqueId;
-    WVJBHandler _messageHandler;
-    
-    NSBundle *_resourceBundle;
-    
-#if defined WVJB_PLATFORM_IOS
-    NSUInteger _numRequestsLoading;
-#endif
-    
-}
+@implementation WebViewJavascriptBridge 
 
 /* API
  *****/

@@ -23,10 +23,33 @@
     #define WVJB_WEBVIEW_DELEGATE_TYPE NSObject<UIWebViewDelegate>
 #endif
 
+#if __has_feature(objc_arc_weak)
+#define WVJB_WEAK __weak
+#else
+#define WVJB_WEAK __unsafe_unretained
+#endif
+
+
 typedef void (^WVJBResponseCallback)(id responseData);
 typedef void (^WVJBHandler)(id data, WVJBResponseCallback responseCallback);
 
 @interface WebViewJavascriptBridge : WVJB_WEBVIEW_DELEGATE_TYPE
+{
+    WVJB_WEAK WVJB_WEBVIEW_TYPE* _webView;
+    WVJB_WEAK id _webViewDelegate;
+    NSMutableArray* _startupMessageQueue;
+    NSMutableDictionary* _responseCallbacks;
+    NSMutableDictionary* _messageHandlers;
+    long _uniqueId;
+    WVJBHandler _messageHandler;
+    
+    NSBundle *_resourceBundle;
+    
+#if defined WVJB_PLATFORM_IOS
+    NSUInteger _numRequestsLoading;
+#endif
+    
+}
 
 + (instancetype)bridgeForWebView:(WVJB_WEBVIEW_TYPE*)webView handler:(WVJBHandler)handler;
 + (instancetype)bridgeForWebView:(WVJB_WEBVIEW_TYPE*)webView webViewDelegate:(WVJB_WEBVIEW_DELEGATE_TYPE*)webViewDelegate handler:(WVJBHandler)handler;
