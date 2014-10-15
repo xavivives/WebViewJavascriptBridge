@@ -1,5 +1,9 @@
-WebViewJavascriptBridge
+
+
+WebViewJavascriptBridge (32bit)
 =======================
+
+Tinny update to allow WebViewJavascriptBridge run on 32bit architectures for frameworks like OpenFrameworks.
 
 An iOS/OSX bridge for sending messages between Obj-C and JavaScript in UIWebViews/WebViews.
 
